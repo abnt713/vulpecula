@@ -29,7 +29,6 @@
   -- LSP
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy: false,
     dependencies: {
       "williamboman/mason.nvim"
     },
@@ -38,7 +37,6 @@
   },
   {
     "neovim/nvim-lspconfig",
-    lazy: false,
     dependencies: {
       "williamboman/mason-lspconfig.nvim"
     },
@@ -49,7 +47,6 @@
   -- DAP
   {
     "jayp0521/mason-nvim-dap.nvim",
-    lazy: false,
     dependencies: {
       "williamboman/mason.nvim",
     },
@@ -61,14 +58,12 @@
   },
   {
     "mfussenegger/nvim-dap",
-    lazy: false,
     dependencies: {
       "jayp0521/mason-nvim-dap.nvim"
     }
   },
   {
     "leoluz/nvim-dap-go",
-    lazy: false,
     dependencies: {
       "mfussenegger/nvim-dap",
       "jayp0521/mason-nvim-dap.nvim"
@@ -77,10 +72,25 @@
       require('dap-go').setup {}
   },
 
+  -- TREESITTER
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build: ":TSUpdate",
+    config: ->
+      require('nvim-treesitter.configs').setup {
+        ensure_installed: {"go", "query"},
+        highlight: {enable: true}
+      }
+  },
+  {
+    "nvim-treesitter/playground"
+    dependencies: {
+      "nvim-treesitter/nvim-treesitter"
+    }
+  },
   -- GIT
   {
     "tpope/vim-fugitive",
-    lazy: false
   },
 
   -- EDITORCONFIG
