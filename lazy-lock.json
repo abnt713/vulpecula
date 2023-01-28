@@ -1,7 +1,0 @@
-{
-  "editorconfig.nvim": { "branch": "master", "commit": "5b9e303e1d6f7abfe616ce4cc8d3fffc554790bf" },
-  "lazy.nvim": { "branch": "main", "commit": "15fe46a728b7473d4cae368838bbc1c79c3a3f48" },
-  "moonscript-vim": { "branch": "master", "commit": "715c96c7c3b02adc507f84bf5754985460afc426" },
-  "neovim-ayu": { "branch": "master", "commit": "ba749799e48a8c5065106989eb8bf9915b51081d" },
-  "vim-fugitive": { "branch": "master", "commit": "2febbe1f00be04f16daa6464cb39214a8566ec4b" }
-}
