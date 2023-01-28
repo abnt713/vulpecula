@@ -157,6 +157,34 @@
         })
   },
 
+  -- LINTER
+  {
+    "jay-babu/mason-null-ls.nvim",
+    dependencies: {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim"
+    },
+    config: ->
+      require('mason-null-ls').setup {
+        automatic_installation: true
+      }
+  },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    dependencies: {
+      "nvim-lua/plenary.nvim"
+    },
+    config: ->
+      with null_ls = require('null-ls')
+        .setup {
+          sources: {
+            null_ls.builtins.diagnostics.revive,
+            null_ls.builtins.formatting.goimports,
+            null_ls.builtins.formatting.gofumpt
+          },
+        }
+  },
+
   -- GIT
   {
     "tpope/vim-fugitive",
