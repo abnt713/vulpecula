@@ -14,8 +14,10 @@
   {
     "nvim-telescope/telescope.nvim"
     dependencies: {
-      "nvim-lua/plenary.nvim"
-    }
+      "nvim-lua/plenary.nvim",
+    },
+    config: ->
+      require('telescope').setup {}
   },
 
   -- MASON
@@ -183,6 +185,18 @@
             null_ls.builtins.formatting.gofumpt
           },
         }
+  },
+
+  -- FILE EXPLORER
+  {
+    "stevearc/oil.nvim",
+    dependencies: {
+      "nvim-tree/nvim-web-devicons"
+    },
+    config: ->
+      require("oil").setup {
+        columns: {"icon"},
+      }
   },
 
   -- GIT
