@@ -52,13 +52,12 @@ default_opts = { noremap: true, silent: true }
     },
     config: ->
       cmpcaps = require('cmp_nvim_lsp').default_capabilities!
-      applycaps = (settings) ->
+      with_cmpcaps = (settings) ->
         settings["capabilities"] = cmpcaps
         return settings
 
-      require('lspconfig').gopls.setup applycaps({})
+      require('vulpecula.hook').lspconfig with_cmpcaps
 
-      keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', default_opts)
       keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})<CR>', default_opts)
       keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()', default_opts)
       keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()', default_opts)
