@@ -15,4 +15,9 @@
       return require('vulpecula.utils').merge_tables(base_plugins, hook!)
 
     return base_plugins
+  
+  dap: (dapleader) ->
+    exists, hook = pcall -> require('vulpecula.hooks.dap')
+    if exists
+      hook dapleader
 }

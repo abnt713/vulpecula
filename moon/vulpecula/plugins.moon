@@ -99,33 +99,15 @@ default_opts = { noremap: true, silent: true }
       "jbyuki/one-small-step-for-vimkind"
     }
     config: ->
-      dap = require('dap')
-      dap.adapters.nlua = (callback, config) ->
-        callback {
-          type: 'server',
-          host: config.host or "127.0.0.1",
-          port: config.port or 8086
-        }
-      dap.configurations.lua = {
-        {
-          type: 'nlua',
-          request: 'attach',
-          name: "nlua attach",
-          host: '127.0.0.1',
-          port: ->
-            tonumber vim.fn.input('Port: ')
-        }
-      }
+      dapleader = vim.g.vulpecula_dapleader or "\\"
+      require('vulpecula.hook').dap dapleader
 
-      dapleader = "\\"
       keymap("n", "#{dapleader}c", "<cmd>lua require('dap').continue()<CR>", default_opts)
       keymap("n", "#{dapleader}r", "<cmd>lua require('dap').repl.toggle()<CR>", default_opts)
       keymap("n", "#{dapleader}b", "<cmd>lua require('dap').toggle_breakpoint()<CR>", default_opts)
       keymap("n", "#{dapleader}l", "<cmd>lua require('dap').list_breakpoints(true)<CR>", default_opts)
       keymap("n", "#{dapleader}<s-b>", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", default_opts)
-
       keymap('n', "#{dapleader}h", "<cmd>lua require('dap.ui.widgets').hover()<CR>", default_opts)
-      keymap('n', '<F5>', '<cmd>lua require("osv").launch({port = 8086})<CR>', default_opts)
   },
 
   -- TREESITTER
