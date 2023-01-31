@@ -136,15 +136,6 @@ default_opts = { noremap: true, silent: true }
       keymap('n', "#{dapleader}h", "<cmd>lua require('dap.ui.widgets').hover()<CR>", default_opts)
       keymap('n', '<F5>', '<cmd>lua require("osv").launch({port = 8086})<CR>', default_opts)
   },
-  {
-    "leoluz/nvim-dap-go",
-    dependencies: {
-      "mfussenegger/nvim-dap",
-      "jayp0521/mason-nvim-dap.nvim"
-    }
-    config: ->
-      require('dap-go').setup {}
-  },
 
   -- TREESITTER
   {
