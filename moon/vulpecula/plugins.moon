@@ -199,13 +199,22 @@
       }
   },
 
-  -- GIT
-  {
-    "tpope/vim-fugitive",
-  },
-
-  -- EDITORCONFIG
+  -- Utilities
+  "tpope/vim-fugitive",
 	"gpanders/editorconfig.nvim",
+  "chrisbra/colorizer",
+  "tpope/vim-commentary",
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config: ->
+      vim.g.indentLine_fileTypeExclude = {
+        'checkhealth', 'help', 'lspinfo', 'packer', 'startup'
+      }
+      require('indent_blankline').setup {
+        char: '¦',
+        buftype_exclude: {'terminal'}
+      }
+  }
   
   -- LANGUAGES
   {
