@@ -1,3 +1,7 @@
+keymap = vim.api.nvim_set_keymap
+default_opts = { noremap: true, silent: true }
+
+-- All plugins definitions
 {
   -- COLORSCHEME
   {
@@ -18,6 +22,9 @@
     },
     config: ->
       require('telescope').setup {}
+      keymap('n', '<Leader>ff', "<cmd>Telescope find_files<CR>", default_opts)
+      keymap('n', '<Leader>fg', "<cmd>Telescope live_grep<CR>", default_opts)
+      keymap('n', '<Leader>fb', "<cmd>Telescope buffers<CR>", default_opts)
   },
 
   -- MASON
@@ -50,7 +57,38 @@
         return settings
 
       require('lspconfig').gopls.setup applycaps({})
+
+      keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', default_opts)
+      keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})<CR>', default_opts)
+      keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()', default_opts)
+      keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()', default_opts)
   },
+  {
+    "ojroques/nvim-lspfuzzy",
+    dependencies: {
+      "junegunn/fzf",
+      "junegunn/fzf.vim"
+    },
+    config: ->
+      require('lspfuzzy').setup {}
+  },
+  {
+    "glepnir/lspsaga.nvim",
+    event: "BufRead",
+    dependencies: {
+      "neovim/nvim-lspconfig",
+      "nvim-tree/nvim-web-devicons"
+    },
+    config: ->
+      require("lspsaga").setup {}
+
+      keymap('n', 'ga', '<cmd>Lspsaga code_action<CR>', default_opts)
+      keymap('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', default_opts)
+      keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', default_opts)
+      keymap('n', 'gm', '<cmd>Lspsaga rename ++project<CR>', default_opts)
+      keymap('n', 'gM', '<cmd>Lspsaga rename<CR>', default_opts)
+      keymap('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', default_opts)
+  }
 
   -- DAP
   {
@@ -69,6 +107,13 @@
     dependencies: {
       "jayp0521/mason-nvim-dap.nvim"
     }
+    config: ->
+      dapleader = "\\"
+      keymap("n", "#{dapleader}c", "<cmd>lua require('dap').continue()<CR>", default_opts)
+      keymap("n", "#{dapleader}r", "<cmd>lua require('dap').repl.toggle()<CR>", default_opts)
+      keymap("n", "#{dapleader}b", "<cmd>lua require('dap').toggle_breakpoint()<CR>", default_opts)
+      keymap("n", "#{dapleader}l", "<cmd>lua require('dap').list_breakpoints(true)<CR>", default_opts)
+      keymap("n", "#{dapleader}<s-b>", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", default_opts)
   },
   {
     "leoluz/nvim-dap-go",
@@ -86,7 +131,7 @@
     build: ":TSUpdate",
     config: ->
       require('nvim-treesitter.configs').setup {
-        ensure_installed: {"go", "query"},
+        ensure_installed: {"go", "query", "markdown"},
         highlight: {enable: true}
       }
   },
@@ -107,6 +152,7 @@
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-vsnip",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/vim-vsnip"
     }
     config: ->
@@ -139,6 +185,7 @@
           },
           sources: cmp.config.sources {
             {name: 'nvim_lsp'},
+            {name: 'nvim_lsp_signature_help'},
             {name: 'vsnip'}
           }, {
             {name: 'buffer'}
@@ -174,6 +221,7 @@
   {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies: {
+      "glepnir/lspsaga.nvim",
       "nvim-lua/plenary.nvim"
     },
     config: ->
@@ -187,20 +235,20 @@
         }
   },
 
-  -- FILE EXPLORER
-  {
-    "stevearc/oil.nvim",
-    dependencies: {
-      "nvim-tree/nvim-web-devicons"
-    },
-    config: ->
-      require("oil").setup {
-        columns: {"icon"},
-      }
-  },
-
   -- Utilities
-  "tpope/vim-fugitive",
+  {
+    "tpope/vim-fugitive",
+    config: ->
+      keymap('n', '<Leader>gs', '<cmd>:Git<CR>', default_opts)
+      keymap('n', '<Leader>gc', '<cmd>:Git commit<CR>', default_opts)
+      keymap('n', '<Leader>gb', '<cmd>:Git commit<CR>', default_opts)
+  },
+  {
+    "airblade/vim-gitgutter",
+    config: ->
+      keymap('n', '<Leader>gp', '<cmd>GitGutterPrevHunk<CR>', default_opts)
+      keymap('n', '<Leader>gn', '<cmd>GitGutterNextHunk<CR>', default_opts)
+  },
 	"gpanders/editorconfig.nvim",
   "chrisbra/colorizer",
   "tpope/vim-commentary",
