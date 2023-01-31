@@ -57,19 +57,6 @@ default_opts = { noremap: true, silent: true }
         return settings
 
       require('vulpecula.hook').lspconfig with_cmpcaps
-
-      keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})<CR>', default_opts)
-      keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()', default_opts)
-      keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()', default_opts)
-  },
-  {
-    "ojroques/nvim-lspfuzzy",
-    dependencies: {
-      "junegunn/fzf",
-      "junegunn/fzf.vim"
-    },
-    config: ->
-      require('lspfuzzy').setup {}
   },
   {
     "glepnir/lspsaga.nvim",
@@ -87,6 +74,10 @@ default_opts = { noremap: true, silent: true }
       keymap('n', 'gm', '<cmd>Lspsaga rename ++project<CR>', default_opts)
       keymap('n', 'gM', '<cmd>Lspsaga rename<CR>', default_opts)
       keymap('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', default_opts)
+
+      keymap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', default_opts)
+      keymap('n', 'gn', '<cmd>Lspsaga diagnostic_jump_next<CR>', default_opts)
+      keymap('n', 'gp', '<cmd>Lspsaga diagnostic_jump_prev<CR>', default_opts)
   }
 
   -- DAP
