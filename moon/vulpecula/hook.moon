@@ -20,4 +20,11 @@
     exists, hook = pcall -> require('vulpecula.hooks.dap')
     if exists
       hook dapleader
+
+  treesitter: ->
+    exists, hook = pcall -> require('vulpecula.hooks.treesitter')
+    if exists
+      return hook!
+
+    return {}
 }

@@ -1,5 +1,13 @@
 keymap = vim.api.nvim_set_keymap
 default_opts = { noremap: true, silent: true }
+merge_tables = require('vulpecula.utils').merge_tables
+merge_fields = (src, field, t) ->
+  if src[field]
+    src[field] = merge_tables(src[field], t)
+  else
+    src[field] = t
+  return src
+
 
 -- All plugins definitions
 {
@@ -115,16 +123,19 @@ default_opts = { noremap: true, silent: true }
     "nvim-treesitter/nvim-treesitter",
     build: ":TSUpdate",
     config: ->
-      require('nvim-treesitter.configs').setup {
-        ensure_installed: {"go", "query", "markdown"},
-        highlight: {enable: true}
-      }
-  },
-  {
-    "nvim-treesitter/playground"
-    dependencies: {
-      "nvim-treesitter/nvim-treesitter"
-    }
+      setup_opts = require('vulpecula.hook').treesitter!
+      if not setup_opts
+        return
+
+      merge_fields(setup_opts, "ensure_installed", {"markdown"})
+
+      if setup_opts.highlight and setup_opts.highlight.enable == nil
+        setup_opts.highlight.enable = true
+
+      if not setup_opts.highlight
+        setup_opts.highlight = {enable: true}
+
+      require('nvim-treesitter.configs').setup setup_opts
   },
 
   -- AUTOCOMPLETE
