@@ -1,0 +1,4 @@
+-- Applied when booting the editor. Great place to define variables and settings.
+-- @param none
+-- @return nil
+->

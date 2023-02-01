@@ -1,4 +1,10 @@
 {
+  -- editor hook: applied when booting the editor.
+  editor: ->
+    exists, hook = pcall -> require('hooks.editor')
+    if exists
+      hook!
+
   -- lspconfig hook: applied when the nvim-lspconfig module is being configured.
   lspconfig: (with_cmpcaps) ->
     exists, hook = pcall -> require('hooks.lspconfig')

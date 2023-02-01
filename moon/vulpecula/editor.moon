@@ -37,3 +37,5 @@ file_reference = ->
 vim.api.nvim_set_keymap(
   'n', '<Leader>fr', '<cmd>lua file_reference()<CR>', {noremap: true, silent: true}
 )
+
+require('vulpecula.ext').editor!
