@@ -10,9 +10,10 @@
   lazy: ->
     base_plugins = require('vulpecula.plugins')
 
-    exists, hook = pcall -> require('vulpecula.hooks.plugins')
+    exists, hook = pcall -> require('vulpecula.hooks.lazy')
     if exists
-      return require('vulpecula.utils').merge_tables(base_plugins, hook!)
+      hook_content = hook!
+      return require('vulpecula.utils').merge_tables(base_plugins, hook_content)
 
     return base_plugins
   

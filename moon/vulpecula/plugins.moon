@@ -12,6 +12,7 @@ merge_fields = (src, field, t) ->
 -- All plugins definitions
 {
   -- COLORSCHEME & VISUAL
+	"gpanders/editorconfig.nvim",
   {
     "Shatur/neovim-ayu",
     lazy: false,
@@ -31,7 +32,7 @@ merge_fields = (src, field, t) ->
         char: '¦',
         buftype_exclude: {'terminal'}
       }
-  }
+  },
 
   -- TELESCOPE
   {
@@ -75,7 +76,7 @@ merge_fields = (src, field, t) ->
         settings["capabilities"] = cmpcaps
         return settings
 
-      require('vulpecula.hook').lspconfig with_cmpcaps
+      require('vulpecula.ext').lspconfig with_cmpcaps
   },
   {
     "glepnir/lspsaga.nvim",
@@ -119,7 +120,7 @@ merge_fields = (src, field, t) ->
     }
     config: ->
       dapleader = vim.g.vulpecula_dapleader or "\\"
-      require('vulpecula.hook').dap dapleader
+      require('vulpecula.ext').dap dapleader
 
       keymap("n", "#{dapleader}c", "<cmd>lua require('dap').continue()<CR>", default_opts)
       keymap("n", "#{dapleader}r", "<cmd>lua require('dap').repl.toggle()<CR>", default_opts)
@@ -134,7 +135,7 @@ merge_fields = (src, field, t) ->
     "nvim-treesitter/nvim-treesitter",
     build: ":TSUpdate",
     config: ->
-      setup_opts = require('vulpecula.hook').treesitter!
+      setup_opts = require('vulpecula.ext').treesitter!
       if not setup_opts
         return
 
@@ -231,7 +232,7 @@ merge_fields = (src, field, t) ->
       "glepnir/lspsaga.nvim"
     },
     config: ->
-      setup_opts = require('vulpecula.hook').null_ls!
+      setup_opts = require('vulpecula.ext').null_ls!
       require('null-ls').setup setup_opts
   },
 
@@ -241,7 +242,7 @@ merge_fields = (src, field, t) ->
     config: ->
       keymap('n', '<Leader>gs', '<cmd>:Git<CR>', default_opts)
       keymap('n', '<Leader>gc', '<cmd>:Git commit<CR>', default_opts)
-      keymap('n', '<Leader>gb', '<cmd>:Git commit<CR>', default_opts)
+      keymap('n', '<Leader>gb', '<cmd>:Git blame<CR>', default_opts)
   },
   {
     "airblade/vim-gitgutter",
@@ -249,13 +250,4 @@ merge_fields = (src, field, t) ->
       keymap('n', '<Leader>gp', '<cmd>GitGutterPrevHunk<CR>', default_opts)
       keymap('n', '<Leader>gn', '<cmd>GitGutterNextHunk<CR>', default_opts)
   },
-	"gpanders/editorconfig.nvim",
-  "chrisbra/colorizer",
-  "tpope/vim-commentary",
-  
-  -- LANGUAGES
-  {
-    "leafo/moonscript-vim",
-    ft: "moon"
-  }
 }
