@@ -27,4 +27,11 @@
       return hook!
 
     return {}
+  
+  null_ls: ->
+    exists, hook = pcall -> require('vulpecula.hooks.null_ls')
+    if exists
+      return hook!
+
+    return {}
 }

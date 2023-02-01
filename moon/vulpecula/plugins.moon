@@ -217,18 +217,11 @@ merge_fields = (src, field, t) ->
   {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies: {
-      "glepnir/lspsaga.nvim",
-      "nvim-lua/plenary.nvim"
+      "glepnir/lspsaga.nvim"
     },
     config: ->
-      with null_ls = require('null-ls')
-        .setup {
-          sources: {
-            null_ls.builtins.diagnostics.revive,
-            null_ls.builtins.formatting.goimports,
-            null_ls.builtins.formatting.gofumpt
-          },
-        }
+      setup_opts = require('vulpecula.hook').null_ls!
+      require('null-ls').setup setup_opts
   },
 
   -- Utilities
