@@ -11,7 +11,7 @@ merge_fields = (src, field, t) ->
 
 -- All plugins definitions
 {
-  -- COLORSCHEME
+  -- COLORSCHEME & VISUAL
   {
     "Shatur/neovim-ayu",
     lazy: false,
@@ -21,6 +21,17 @@ merge_fields = (src, field, t) ->
         .setup {}
         .colorscheme!
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config: ->
+      vim.g.indentLine_fileTypeExclude = {
+        'checkhealth', 'help', 'lspinfo', 'packer', 'startup'
+      }
+      require('indent_blankline').setup {
+        char: '¦',
+        buftype_exclude: {'terminal'}
+      }
+  }
 
   -- TELESCOPE
   {
@@ -241,17 +252,6 @@ merge_fields = (src, field, t) ->
 	"gpanders/editorconfig.nvim",
   "chrisbra/colorizer",
   "tpope/vim-commentary",
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config: ->
-      vim.g.indentLine_fileTypeExclude = {
-        'checkhealth', 'help', 'lspinfo', 'packer', 'startup'
-      }
-      require('indent_blankline').setup {
-        char: '¦',
-        buftype_exclude: {'terminal'}
-      }
-  }
   
   -- LANGUAGES
   {

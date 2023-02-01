@@ -5,9 +5,9 @@
     if exists
       hook with_cmpcaps
 
-  -- plugins hooks: applied when calling `lazy.setup`. Appends the hook results
+  -- lazy hook: applied when calling `lazy.setup`. Appends the hook results
   -- to the base plugins list.
-  plugins: ->
+  lazy: ->
     base_plugins = require('vulpecula.plugins')
 
     exists, hook = pcall -> require('vulpecula.hooks.plugins')

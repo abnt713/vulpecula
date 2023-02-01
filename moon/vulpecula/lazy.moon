@@ -14,5 +14,5 @@
 		vim.opt.rtp\prepend(lazypath)
 
 	setup: ->
-		require("lazy").setup require('vulpecula.hook').plugins()
+		require("lazy").setup require('vulpecula.hook').lazy()
 }
