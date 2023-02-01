@@ -108,15 +108,13 @@ merge_fields = (src, field, t) ->
     },
     config: ->
       require('mason-nvim-dap').setup {
-        automatic_installation: true,
-        ensure_installed: {"delve"}
+        automatic_installation: true
       }
   },
   {
     "mfussenegger/nvim-dap",
     dependencies: {
-      "jayp0521/mason-nvim-dap.nvim",
-      "jbyuki/one-small-step-for-vimkind"
+      "jayp0521/mason-nvim-dap.nvim"
     }
     config: ->
       dapleader = vim.g.vulpecula_dapleader or "\\"
