@@ -1,2 +1,14 @@
 -- @return table A table containing lazy plugin specs. [Example](https://github.com/folke/lazy.nvim#examples)
--> {}
+-> {
+  -- Uncomment to enable Ayu colorcheme.
+  -- COLORSCHEME & VISUAL
+  -- {
+  --   "Shatur/neovim-ayu",
+  --   lazy: false,
+  --   priority: 1000,
+  --   config: ->
+  --     with require 'ayu'
+  --       .setup {}
+  --       .colorscheme!
+  -- },
+}
