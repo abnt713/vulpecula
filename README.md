@@ -1,4 +1,4 @@
-# Vulpecula
+# Vulpecula.nvim
 
 > You become responsible, forever, for what you have tamed.
 
