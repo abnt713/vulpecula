@@ -23,6 +23,15 @@ merge_fields = (src, field, t) ->
         .colorscheme!
   },
   {
+    "nvim-tree/nvim-tree.lua",
+    dependencies: {
+      "nvim-tree/nvim-web-devicons"
+    },
+    config: ->
+      require('nvim-tree').setup!
+      keymap('n', '<Leader>ft', '<cmd>NvimTreeToggle<CR>', default_opts)
+  },
+  {
     "lukas-reineke/indent-blankline.nvim",
     config: ->
       vim.g.indentLine_fileTypeExclude = {
