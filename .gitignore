@@ -1,6 +1,6 @@
 /lua/vulpecula/*
 /lua/hooks/*
-/moon/hooks/*
+/moon/hooks
 /lazy-lock.json
 
 !.gitkeep

@@ -99,9 +99,9 @@ merge_fields = (src, field, t) ->
 
       keymap('n', 'ga', '<cmd>Lspsaga code_action<CR>', default_opts)
       keymap('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', default_opts)
-      keymap('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', default_opts)
-      keymap('n', 'gm', '<cmd>Lspsaga rename ++project<CR>', default_opts)
-      keymap('n', 'gM', '<cmd>Lspsaga rename<CR>', default_opts)
+      keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', default_opts)
+      keymap('n', 'gm', '<cmd>Lspsaga rename<CR>', default_opts)
+      keymap('n', 'gM', '<cmd>Lspsaga rename ++project<CR>', default_opts)
       keymap('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', default_opts)
 
       keymap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', default_opts)
