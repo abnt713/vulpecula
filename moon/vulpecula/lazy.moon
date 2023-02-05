@@ -14,5 +14,12 @@
 		vim.opt.rtp\prepend(lazypath)
 
 	setup: ->
-		require("lazy").setup require('vulpecula.ext').lazy()
+		require("lazy").setup(
+      require('vulpecula.ext').lazy(),
+      {
+        ui: {
+          border: 'rounded'
+        }
+      }
+    )
 }

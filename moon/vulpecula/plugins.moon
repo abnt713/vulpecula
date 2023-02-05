@@ -31,7 +31,7 @@ merge_fields = (src, field, t) ->
     "williamboman/mason.nvim"
     lazy: false,
     config: ->
-      require('mason').setup {}
+      require('mason').setup {ui: {border: 'rounded'}}
   },
 
   -- LSP
