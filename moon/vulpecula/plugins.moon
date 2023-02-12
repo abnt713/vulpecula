@@ -47,7 +47,8 @@ merge_fields = (src, field, t) ->
     "neovim/nvim-lspconfig",
     dependencies: {
       "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/nvim-cmp"
+      "hrsh7th/nvim-cmp",
+      "nvim-telescope/telescope.nvim"
     },
     config: ->
       cmpcaps = require('cmp_nvim_lsp').default_capabilities!
@@ -56,29 +57,20 @@ merge_fields = (src, field, t) ->
         return settings
 
       require('vulpecula.ext').lspconfig with_cmpcaps
+
+      keymap('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', default_opts)
+      keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', default_opts)
+      keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', default_opts)
+      keymap('n', 'gm', '<cmd>lua vim.lsp.buf.rename()<CR>', default_opts)
+
+      keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', default_opts)
+      keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', default_opts)
+      keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', default_opts)
+
+      keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})', default_opts)
+      keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()', default_opts)
+      keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()', default_opts)
   },
-  {
-    "glepnir/lspsaga.nvim",
-    event: "BufRead",
-    dependencies: {
-      "neovim/nvim-lspconfig",
-      "nvim-tree/nvim-web-devicons"
-    },
-    config: ->
-      require("lspsaga").setup {}
-
-      keymap('n', 'ga', '<cmd>Lspsaga code_action<CR>', default_opts)
-      keymap('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', default_opts)
-      keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', default_opts)
-      keymap('n', 'gm', '<cmd>Lspsaga rename<CR>', default_opts)
-      keymap('n', 'gM', '<cmd>Lspsaga rename ++project<CR>', default_opts)
-      keymap('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', default_opts)
-
-      keymap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', default_opts)
-      keymap('n', 'gn', '<cmd>Lspsaga diagnostic_jump_next<CR>', default_opts)
-      keymap('n', 'gp', '<cmd>Lspsaga diagnostic_jump_prev<CR>', default_opts)
-  }
-
   -- DAP
   {
     "jayp0521/mason-nvim-dap.nvim",
@@ -205,9 +197,7 @@ merge_fields = (src, field, t) ->
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    dependencies: {
-      "glepnir/lspsaga.nvim"
-    },
+    dependencies: {},
     config: ->
       setup_opts = require('vulpecula.ext').null_ls!
       require('null-ls').setup setup_opts
