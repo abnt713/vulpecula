@@ -28,14 +28,14 @@ vim.cmd 'au BufRead,BufNewFile *.md,*.txt setlocal textwidth=80'
 -- Handy function to retrieve a file reference and copy it to the clipboard.
 -- The resulting format is: {path}/{file}.{ext}:{line_number} 
 -- example: moon/vulpecula/editor.moon:30
-export file_reference
-file_reference = ->
+export File_reference
+File_reference = ->
   fileref = vim.fn.expand('%') .. ':' .. vim.fn.line('.')
   vim.fn.setreg '+', fileref
   print fileref, 'copied to clipboard'
 
 vim.api.nvim_set_keymap(
-  'n', '<Leader>fr', '<cmd>lua file_reference()<CR>', {noremap: true, silent: true}
+  'n', '<Leader>fr', '<cmd>lua File_reference()<CR>', {noremap: true, silent: true}
 )
 
 require('vulpecula.ext').editor!

@@ -63,14 +63,23 @@ merge_fields = (src, field, t) ->
       keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', default_opts)
       keymap('n', 'gm', '<cmd>lua vim.lsp.buf.rename()<CR>', default_opts)
 
-      keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', default_opts)
-      keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', default_opts)
-      keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', default_opts)
+      keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', default_opts)
+      keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', default_opts)
+      keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', default_opts)
 
       keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})', default_opts)
       keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()', default_opts)
       keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()', default_opts)
   },
+  {
+    "gfanto/fzf-lsp.nvim",
+    dependencies: {
+      'nvim-lua/plenary.nvim',
+      'junegunn/fzf'
+    }
+    config: ->
+      require('fzf_lsp').setup!
+  }
   -- DAP
   {
     "jayp0521/mason-nvim-dap.nvim",
