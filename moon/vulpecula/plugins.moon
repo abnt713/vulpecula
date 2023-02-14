@@ -51,9 +51,17 @@ merge_fields = (src, field, t) ->
       "nvim-telescope/telescope.nvim"
     },
     config: ->
+      border = 'rounded'
+
+      handlers = {
+        ["textDocument/hover"]: vim.lsp.with(vim.lsp.handlers.hover, {border: border}),
+        ["textDocument/signatureHelp"]: vim.lsp.with(vim.lsp.handlers.signature_help, {border: border}),
+      }
+
       cmpcaps = require('cmp_nvim_lsp').default_capabilities!
       with_cmpcaps = (settings) ->
         settings["capabilities"] = cmpcaps
+        settings["handlers"] = handlers
         return settings
 
       require('vulpecula.ext').lspconfig with_cmpcaps
@@ -64,6 +72,7 @@ merge_fields = (src, field, t) ->
       keymap('n', 'gm', '<cmd>lua vim.lsp.buf.rename()<CR>', default_opts)
 
       keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', default_opts)
+      keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', default_opts)
       keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', default_opts)
       keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', default_opts)
 
