@@ -76,9 +76,9 @@ merge_fields = (src, field, t) ->
       keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', default_opts)
       keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', default_opts)
 
-      keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})', default_opts)
-      keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()', default_opts)
-      keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()', default_opts)
+      keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})<CR>', default_opts)
+      keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', default_opts)
+      keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', default_opts)
   },
   {
     "gfanto/fzf-lsp.nvim",
