@@ -177,19 +177,6 @@ merge_fields = (src, field, t) ->
             {name: 'buffer'}
           }
         }
-        .setup.cmdline({'/', '?'}, {
-          mapping: cmp.mapping.preset.cmdline!,
-          sources: {
-            {name: 'buffer'}
-          }
-        })
-        .setup.cmdline(':', {
-          mapping: cmp.mapping.preset.cmdline!,
-          sources: cmp.config.sources {
-            {{name: 'path'}},
-            {{name: 'cmdline', option: {ignore_cmds: {'Man', '!'}}}}
-          }
-        })
   },
 
   -- LINTER
